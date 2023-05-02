@@ -52,12 +52,12 @@ public class MenuTask extends JFrame implements ActionListener{
         add(menuBar);
 
         menu3Item.addActionListener(this);
-        exitItem.addActionListener(this);
+        exit.addActionListener(this);
         setVisible(true);
     }
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource()==exitItem)
+        if(e.getSource()==exit)
         {
             dispose();
         }
