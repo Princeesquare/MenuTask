@@ -2,51 +2,59 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class MenuTask extends JFrame implements ActionListener{
-    private JMenuBar menuBar = new JMenuBar();
-    private JMenu File, save,edit;
-    private JMenuItem copy,paste,New,saveop,saveas,exit;
+public class
+MenuTask extends JFrame implements ActionListener{
+    private final JMenuItem copy;
+    private final JMenuItem paste;
+    private final JMenuItem New;
+    private final JMenuItem saveop;
+    private final JMenuItem saveas;
+    private final JMenuItem exit;
     public MenuTask()
     {
         setSize(400,200);
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Menu Task");
 
-        File=new JMenu("File");
+        JMenu file = new JMenu("File");
         New=new JMenuItem("New");
-        File.add(New);
-        File.addSeparator();
+        file.add(New);
+        file.addSeparator();
 
-       /* save=new JMenuItem("Save");
-        ImageIcon ic=new ImageIcon(new ImageIcon("save.JPG").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT));
-        save.setIcon(ic);
-        File.add(save);
-        File.addSeparator();*/
-
-        save =new JMenu("Save");
+        JMenu save = new JMenu("Save");
         ImageIcon ic=new ImageIcon(new ImageIcon("save.JPG").getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT));
         save.setIcon(ic);
         saveop=new JMenuItem("Save");
         save.add(saveop);
         saveas = new JMenuItem("Save as");
         save.add(saveas);
-        File.add(save);
-        File.addSeparator();
+        file.add(save);
+        file.addSeparator();
+
 
         exit=new JMenuItem("Exit");
-        File.add(exit);
-        menuBar.add(File);
+        file.add(exit);
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(file);
 
-        edit=new JMenu("Edit");
+
+        JMenu space = new JMenu(" ");
+        menuBar.add(space);
+
+        JMenu edit = new JMenu("Edit");
         copy=new JMenuItem("Copy");
         edit.add(copy);
         paste = new JMenuItem("Paste");
         edit.add(paste);
         menuBar.add(edit);
+        edit.setBounds(20, 100, 20, 20);
 
 
         add(menuBar);
-
+        New.addActionListener(this);
+        saveop.addActionListener(this);
+        saveas.addActionListener(this);
         exit.addActionListener(this);
         copy.addActionListener(this);
         paste.addActionListener(this);
@@ -54,10 +62,14 @@ public class MenuTask extends JFrame implements ActionListener{
     }
     public void actionPerformed(ActionEvent e)
     {
+        if(e.getSource()== New)
+            JOptionPane.showMessageDialog(this, "New File Opened Successfully");
+        if(e.getSource()== saveas)
+            JOptionPane.showMessageDialog(this, "Save file as");
+        if(e.getSource()== saveop)
+            JOptionPane.showMessageDialog(this, "File Saved Successfully");
         if(e.getSource()==exit)
-        {
             dispose();
-        }
         if (e.getSource() == copy)
             JOptionPane.showMessageDialog(this, "Copied to Clipboard");
         else if (e.getSource() == paste)
